@@ -1,6 +1,6 @@
 Arquivo contendo um verificador de luminosidade para arduino
 -Objetivo:
-Fazer arduino enviar valores de luminosidade para aplicação WEB em rails
+Fazer o arduino enviar valores de luminosidade para aplicação WEB em rails
 Software Utilizado:
 - Arduino IDE
 Hardware Utilizado:
