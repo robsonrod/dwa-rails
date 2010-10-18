@@ -1,5 +1,4 @@
 /*
-Autor: Robson Rodrigues
 Obetivo: Ler dados do LDR (Sensor de Luminosidade) e disponibiliza-los via porta serial
 Funcinamento: Quanto menos luz mais LEDS acesos e quanto mais luz menos leds acesos
 */
