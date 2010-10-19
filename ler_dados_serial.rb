@@ -1,3 +1,4 @@
+#Programa em ruby que le os dados da porta serial
 require "rubygems"
 require "serialport"
 
