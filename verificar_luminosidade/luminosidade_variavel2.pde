@@ -25,24 +25,25 @@ void loop(){
   Serial.println(valor); // Mostra no Serial Monitor o valor da variavel “valor”
   delay(100); // Faz uma pequena pausa de 100 Milisegundos    
   
-   controleSensor();       
+   controlarLeds();       
         
 }
 
-void controleSensor(){
+
+void controlarLeds(){
 int ledParaLigar = map (valor, 0, 850, 0, 9); // Mapeia o valor do LDR, verifica o range (0 .. 850) e esse valor 
                                                 //a um de para com os leds menor que 9    
   
-  if (valor > 850){
+  if (valor > 850){  
     for (int x = 0; x <= ledParaLigar; x++){ // Varre a lista de leds para ligar conforme a luminosidade
       digitalWrite(ledPins[x], HIGH); // Liga os lead 
-      delay(50);  // Faz uma pequena pausa de 100 Milisegundos 
+      delay(50);  // Faz uma pequena pausa de 50 Milisegundos 
     }
   } else{
   
     for (int x = 0; x <= ledParaLigar; x++){ // Varre a lista de leds para apagar conforme a luminosidade
       digitalWrite(ledPins[x], LOW); // Apaga os Leds
-      delay(50);  // Faz uma pequena pausa de 100 Milisegundos 
+      delay(50);  // Faz uma pequena pausa de 50 Milisegundos 
     }
   }
 }
