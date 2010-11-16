@@ -1,38 +1,27 @@
+#Programa principal que vai receber os dados postados pelo arduino e criar um
+#arquivo .css conforme a luminosidade
+
 require "rubygems"
 require "sinatra"
-require "serialport"
 
-sp = SerialPort.new "/dev/ttyUSB0" #Caso use windows a porta será COM7
+get '/' do
+  file = File.new('public/dados.rdb')
+  valor =  Integer(file.read)
 
-
-
-sp.close
-
-get '/leitordados' do
-
-  while true do
-    printf(sp.read)
+  if (Integer(valor) < 850) then
+     erb :ligado
+  else
+     erb :desligado
   end
 
-  #erb :index
 end
 
 post '/dados' do
   valor = params[:valor]
-
-  if (Integer(valor) < 850) then
-    redirect "/ligado/#{valor}"
-  else
-    redirect "/desligado/#{valor}"
+  puts(valor)
+  File.open('public/dados.rdb', "w") do |file|
+    file.write(valor)
   end
 
-end
-
-get '/ligado/:valor' do
-  erb :ligado
-end
-
-get '/desligado/:valor' do
-  erb :ligado
 end
 

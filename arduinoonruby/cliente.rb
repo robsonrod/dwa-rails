@@ -1,14 +1,17 @@
-#Programa em ruby que le os dados da porta serial
+#Programa em ruby que le os dados da porta serial do meu computador mandar para o
+#aplicação web
 
 require 'rubygems'
 require 'rest-client'
 require "serialport"
 
-sp = SerialPort.new "/dev/ttyUSB0" #Caso use windows a porta será COM7
+sp = SerialPort.new "/dev/ttyUSB0"
 
   while true do
-      #RestClient.post 'http://localhost:4567/dados', :valor => '4'
-RestClient.post 'http://localhost:4567/dados', :valor => '4', :content_type => 'application/x-www-form-urlencoded; charset=UTF-8'
+     @valor = String(sp.read.strip)
+    if (!@valor.empty?) then
+     RestClient.post 'http://localhost:4567/dados', :valor =>  @valor, :content_type => 'application/x-www-form-urlencoded'
+    end
   end
 sp.close
 
