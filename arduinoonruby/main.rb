@@ -1,30 +1,20 @@
 require "rubygems"
 require "sinatra"
-require "sequel"
+require "serialport"
 
-module Points
-  def self.dados
-    @@dados ||= make
+sp = SerialPort.new "/dev/ttyUSB0" #Caso use windows a porta será COM7
+
+
+
+sp.close
+
+get '/leitordados' do
+
+  while true do
+    printf(sp.read)
   end
 
-  def self.criabase
-    db = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://arduino.db')
-    cria_tabelas(db)
-    db[:points]
-  end
-
-  def self.cria_tabelas(db)
-    db.create_table :dadosarduino do
-    primary_key :id
-    Integer :valor
-    timestamp :timestamp
-  end
-  rescue Sequel::DatabaseError
-  end
-end
-
-get '/' do
-  erb :index
+  #erb :index
 end
 
 post '/dados' do
